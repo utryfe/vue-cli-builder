@@ -13,6 +13,10 @@
     "name": "star",
     "email": "star2018@outlook.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/star2018/vue-cli-plugin-ut-builder.git"
+  },
   "dependencies": {
     "chalk": "^2.4.1",
     "copy-webpack-plugin": "^4.6.0",
