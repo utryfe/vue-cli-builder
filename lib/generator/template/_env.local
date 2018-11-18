@@ -1,0 +1,8 @@
+# 环境变量本地配置文件，不会同步到git
+# 可覆盖 .env 中到配置
+
+# 是否构建单页应用
+BUILD_SPA = true
+
+# 是否构建多页应用
+BUILD_MPA = false
