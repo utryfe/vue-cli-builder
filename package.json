@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -22,11 +22,15 @@
     "copy-webpack-plugin": "^4.6.0",
     "glob": "^7.1.3",
     "html-webpack-plugin": "^3.2.0",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.1",
     "unused-files-webpack-plugin": "^3.4.0",
     "webpack-merge": "^4.1.4"
   },
   "devDependencies": {
+    "@vue/cli-service": "^3.1.4"
+  },
+  "peerDependencies": {
     "@vue/cli-service": "^3.1.4"
   },
   "engines": {
