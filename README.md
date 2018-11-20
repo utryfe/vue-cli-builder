@@ -17,6 +17,8 @@
 > 配置定义
 
 ```javascript
+// vue.config.js
+
 const outputDir = 'dist'
 const assetsDir = ''
 
@@ -82,7 +84,6 @@ module.exports = {
         // 用config来修改插件配置时，未声明过的插件要使用use来指定构造函数，而已声明的插件再次修改时使用use则会报错
         // 所以推荐使用plugin.use来对插件配置进行修改（方法内对这些要求进行了处理）
         config.plugin('myPlugin').tap((args) => {
-          // 更多config的使用，可
           return args
         })
         // config还可以修改其他更多的配置项，比如entry，rule等，可参考'webpack-chain'
@@ -103,12 +104,38 @@ module.exports = {
         // apply方法会被webpack调用
         apply(compiler) {
           // compiler为webpack的编译器实例
-          // 更多的webpack插件开发内容，可参数webpack官方文档
+          // 更多的webpack插件开发内容，可参考webpack官方文档
         }
       },
     },
   },
 }
+```
+
+### 环境变量文件
+
+```dotenv
+# .env
+
+# 默认的环境变量配置文件
+
+# HTML模板文件路径
+HTML_TEMPLATE = index.html
+
+# 多页应用入口脚本
+# 可用逗号（,）分隔多个匹配模式
+MPA_ENTRY = src/pages/*/main.js
+
+# 单页应用入口脚本
+SPA_ENTRY = src/main.js
+
+# 是否构建单页应用
+BUILD_SPA = true
+
+# 是否构建多页应用
+# 可用逗号（,）分隔目录名，指定只构建哪些页面
+# BUILD_MPA = foo, boo
+BUILD_MPA = false
 ```
 
 ### 插件服务（Service）
