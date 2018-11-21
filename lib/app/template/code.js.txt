@@ -1,0 +1,263 @@
+import Vue from 'vue'
+<% if (useVuex) { %>
+import Vuex, { Store } from 'vuex'
+<% } %>
+<% if (useRouter) { %>
+import Router from 'vue-router'
+<% } %>
+// 导入根App
+<%= importGlobalApp %>
+<% if (useVuex) { %>
+// 导入全局Store
+<%= importGlobalStore %>
+<% } %>
+<% if (useRouter) { %>
+// 导入全局Router
+<%= importGlobalRoutes %>
+<% } %>
+<% if (useVuex) { %>
+// 导入模块Store
+<%= importModuleStores %>
+<% } %>
+<% if (useRouter) { %>
+// 导入模块Router
+<%= importModuleRoutes %>
+<% } %>
+// 导入模块App
+<%= importModuleApp %>
+
+// 应用类型
+const applicationType = <%= type %>
+
+<% if (useRouter) { %>
+// 安装Vue插件
+Vue.use(Router)
+<% } %>
+<% if (useVuex) { %>
+Vue.use(Vuex)
+<% } %>
+
+// 禁止vue提示产品模式信息
+Vue.config.productionTip = false
+
+<% if (useRouter) { %>
+// 检查路由配置是否有效
+function checkRoute(route) {
+  if (route && typeof route === 'object') {
+    const { path, component, components, redirect } = route
+    return !!(
+      typeof path === 'string' &&
+      path.trim() &&
+      (component || components || redirect)
+    )
+  }
+  return false
+}
+
+// 初始化模块路由配置
+function initModuleRouter() {
+  const appRoutes = []
+  const spa = applicationType === 'spa'
+  // 处理模块路由
+  moduleRoutes.forEach((obj) => {
+    if (obj && typeof obj === 'object') {
+      const { module, component, routes } = obj
+      const modulePath = `/${module}`
+      //
+      const registered = (!Array.isArray(routes) ? [routes] : routes).reduce(
+        (routes, route) => {
+          if (checkRoute(route)) {
+            if (spa && route.path === '/') {
+              // 替换根路由为模块路由
+              route.path = modulePath
+            }
+            routes.push(route)
+          }
+          return routes
+        },
+        []
+      )
+      if (
+        spa &&
+        component &&
+        !registered.some((route) => route.path === modulePath)
+      ) {
+        // 注册当前模块路由
+        registered.push({
+          path: modulePath,
+          component,
+        })
+      }
+      if (registered.length) {
+        appRoutes.push(...registered)
+      }
+    }
+  })
+  //
+  return appRoutes
+}
+
+// 创建路由实例
+function createRouter() {
+  // 初始化模块路由配置
+  const routes = initModuleRouter()
+  const spa = applicationType === 'spa'
+  // 初始化全局路由配置
+  globalRoutes.forEach((route) => {
+    if (checkRoute(route)) {
+      routes.push(route)
+    }
+  })
+  // 添加根路由
+  if (!routes.some((route) => route.path === '/')) {
+    if (spa) {
+      const indexRoute = routes.find(
+        (route) => route && /^\/index$/i.test(route.path)
+      )
+      if (indexRoute) {
+        // 重定向至index路由
+        routes.push({
+          path: '/',
+          redirect: '/index',
+        })
+      }
+    } else {
+      // mpa
+      if (ModuleApp) {
+        const indexRoute = moduleRoutes.find(
+          (route) => route && route.component === ModuleApp
+        )
+        if (indexRoute) {
+          // 重定向至模块路由
+          routes.push({
+            path: '/',
+            redirect: `/${indexRoute.module}`,
+          })
+        }
+      }
+    }
+  }
+  // 实例化路由器
+  const { created, ...options } = Object.assign({}, routerOptions)
+  const router = new Router(
+    Object.assign(
+      {
+        mode: 'hash',
+        fallback: false,
+        scrollBehavior() {
+          return { x: 0, y: 0 }
+        },
+      },
+      options,
+      { routes }
+    )
+  )
+  // 实例化完成回调，可绑定全局守卫等
+  if (typeof created === 'function') {
+    created.call(router, router)
+  }
+  return router
+}
+<% } %>
+
+<% if (useVuex) { %>
+// 初始化模块Store配置
+function initModuleStore() {
+  const appStores = {}
+  const hasOwnProperty = Object.prototype.hasOwnProperty
+  //
+  moduleStores.forEach((obj) => {
+    if (obj && typeof obj === 'object') {
+      const { module, store } = obj
+      if (store && typeof store === 'object') {
+        const { namespace: name, ...setup } = store
+        const namespace = (typeof name === 'string' ? name : '').trim() || module
+        // 子模块不能使用global命名空间
+        if (namespace === 'global') {
+          throw new Error('Store子模块名称不能使用"global"')
+        }
+        if (hasOwnProperty.call(appStores, namespace)) {
+          throw new Error(`Store模块命名空间重复: ${namespace}`)
+        }
+        // 没有显式声明命名空间，则默认开启
+        if (setup.namespaced === undefined) {
+          setup.namespaced = true
+        }
+        appStores[namespace] = setup
+      }
+    }
+  })
+  //
+  return appStores
+}
+
+// 创建Store实例
+function createStore() {
+  // 初始化子模块配置
+  const modules = initModuleStore()
+  // 全局模块配置
+  const global = Object.assign({}, globalStore)
+  // 删除可能添加了的全局命名空间声明
+  delete global.namespaced
+  // 实例化Store
+  const { created, ...options } = Object.assign({}, storeOptions)
+  const store = new Store(
+    Object.assign({}, options, {
+      ...global,
+      modules,
+    })
+  )
+  // 实例化完成回调
+  if (typeof created === 'function') {
+    created.call(store, store)
+  }
+  //
+  return store
+}
+<% } %>
+
+// 创建App
+function createApp() {
+  //
+  const title = moduleTitle || globalTitle
+  if (title && typeof title === 'string') {
+    document.title = title
+  }
+  // 挂载app
+  new Vue({
+    <% if (useRouter) { %>
+    router: createRouter(),
+    <% } %>
+    <% if (useVuex) { %>
+    store: createStore(),
+    <% } %>
+    //
+    render(createElement) {
+    <% if (useRouter) { %>
+      //
+      return createElement(
+        GlobalApp || {
+          name: 'App',
+          render(createElement) {
+            return createElement(Vue.component('RouterView'))
+          },
+        }
+      )
+    <% } %>
+    <% if (!useRouter) { %>
+      return createElement(
+        ModuleApp || {
+          name: 'App',
+          render(createElement) {
+            return createElement('<div>')
+          },
+        }
+      )
+    <% } %>
+    },
+    //
+  }).$mount('#app')
+}
+
+// launch
+createApp()

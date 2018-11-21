@@ -28,8 +28,10 @@ module.exports = {
   assetsDir,
   // vue-cli自定义插件的配置（下面配置项被vue-cli-plugin-ut-builder插件支持）
   pluginOptions: {
+    // 是否开启代码预处理
+    preprocess: true,
     // 对根据目录名称生成的HTML文件进行改名（主要应用于多页应用）
-    indexMap: {
+    pageNameMap: {
       csa: 'index',
     },
     // 使用到的服务配置（每一个配置项的值将作为参数传给相应的服务）
@@ -47,8 +49,12 @@ module.exports = {
       unused: true,
       // 构建耗时提示
       timeCost: true,
-      // html插件配置，同'html-webpack-plugin'的参数配置
-      html: {},
+      // html插件配置
+      html: {
+        // 属性名为页面名称模式匹配字符串
+        '.*': {},
+        '^index$': {},
+      },
       // 产品压缩打包服务（仅产品模式有效，使用zip打包格式）
       // 打多个包可用数组传参
       compress: {
@@ -145,27 +151,31 @@ module.exports = {
 ### 环境变量文件
 
 ```dotenv
-# .env
-
-# 默认的环境变量配置文件
-
-# HTML模板文件路径
-HTML_TEMPLATE = index.html
-
-# 多页应用入口脚本
-# 可用逗号（,）分隔多个匹配模式
-MPA_ENTRY = src/pages/*/main.js
-
-# 单页应用入口脚本
-SPA_ENTRY = src/main.js
-
-# 是否构建单页应用
-BUILD_SPA = true
-
-# 是否构建多页应用
-# 可用逗号（,）分隔目录名，指定只构建哪些页面
-# BUILD_MPA = foo, boo
-BUILD_MPA = false
+  # .env
+  # 模块入口
+  BUILD_MODULE_ENTRY = src/pages/*/App.vue
+  # html模板页面路径
+  BUILD_HTML_TEMPLATE = public/index.html
+  # 只构建指定的模块，用逗号分隔的字符串或者正则表达式字面量
+  BUILD_MODULE_FILTER =
+  # 是否构建多页应用
+  BUILD_MPA = false
+  # 是否使用模块懒加载
+  BUILD_CODE_SPLITTING = true
+  # 使用vuex
+  BUILD_APP_USE_VUEX = true
+  # 使用vue router
+  BUILD_APP_USE_ROUTER = true
+  # 根App路径
+  BUILD_ROOT_APP_PATH = src/App.vue
+  # 全局Store路径
+  BUILD_GLOBAL_STORE_PATH = src/store.js
+  # 全局Router路径
+  BUILD_GLOBAL_ROUTER_PATH = src/router.js
+  # 模块router文件名称（可以是相对于模块目录的子目录文件路径）
+  BUILD_MODULE_ROUTER_NAME = router.js
+  # 模块store文件名称（可以是相对于模块目录的子目录文件路径）
+  BUILD_MODULE_STORE_NAME = store.js
 ```
 
 ### 插件服务（Service）
