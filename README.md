@@ -39,7 +39,7 @@ module.exports = {
       // 参数值为字符串时将被解析为导出文件的路径
       eject: 'webpack://build.webpack.js',
       // 拷贝资源
-      // 被导出路径支持glob语法，也可以使用数组传参，参数值格式同'copy-webpack-plugin'的参数
+      // 也可以使用数组传参，参数值格式同'copy-webpack-plugin'的参数
       copy: {
         'src/assets/img': `${outputDir}/${assetsDir}/img`,
       },
@@ -49,6 +49,14 @@ module.exports = {
       timeCost: true,
       // html插件配置，同'html-webpack-plugin'的参数配置
       html: {},
+      // 产品压缩打包服务（仅产品模式有效，使用zip打包格式）
+      compress: {
+        // 可指定要拷贝并压缩的资源（不指定则使用构建输出目录下的所有资源）
+        // 路径相对于outputDir，可使用glob路径语法
+        copy: { '*.html': 'templates/', '!(*.html)/**/*': 'static/' },
+        // 压缩包的路径名称，不指定则是npm包名加版本号（路径相对于工程根路径，也可指定为绝对路径）
+        name: 'dist.zip',
+      },
       // 调用自定义服务
       myService: {
         // 可以给服务传递相应参数
