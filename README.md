@@ -50,6 +50,7 @@ module.exports = {
       // html插件配置，同'html-webpack-plugin'的参数配置
       html: {},
       // 产品压缩打包服务（仅产品模式有效，使用zip打包格式）
+      // 打多个包可用数组传参
       compress: {
         // 可指定要拷贝并压缩的资源（不指定则使用构建输出目录下的所有资源）
         // 路径相对于outputDir，可使用glob路径语法
