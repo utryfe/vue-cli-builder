@@ -58,6 +58,11 @@ module.exports = {
         // 压缩包的路径名称，不指定则是npm包名加版本号（路径相对于工程根路径，也可指定为绝对路径）
         name: 'dist.zip',
       },
+      // 接口mock服务
+      mock: {
+        path: 'mock',
+        delay: 1000,
+      },
       // 调用自定义服务
       myService: {
         // 可以给服务传递相应参数
