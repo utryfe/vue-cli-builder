@@ -60,8 +60,12 @@ module.exports = {
       },
       // 接口mock服务
       mock: {
+        // mock模块文件存放路径
         path: 'mock',
+        // 全局接口返回延迟定义
         delay: 1000,
+        // 自动初始化接口定义模块文件
+        init: true
       },
       // 调用自定义服务
       myService: {
