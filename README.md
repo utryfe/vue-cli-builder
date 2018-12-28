@@ -65,7 +65,9 @@ module.exports = {
         // 全局接口返回延迟定义
         delay: 1000,
         // 自动初始化接口定义模块文件
-        init: true
+        init: true,
+        // 定位接口声明位置
+        locate: true,
       },
       // 调用自定义服务
       myService: {
