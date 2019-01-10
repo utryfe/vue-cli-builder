@@ -5,6 +5,14 @@
     <title>WebSocket Mocker</title>
     <link rel="stylesheet" href="index.css" />
     <script src="sockjs.min.js"></script>
+    <script src="socket.io.js"></script>
+    <script>
+      var MOCK_SETUP = {
+        address: '<%= address %>',
+        context: '<%= context %>',
+        client: '<%= client %>',
+      }
+    </script>
   </head>
   <body>
     <div>hello</div>
