@@ -68,6 +68,13 @@ module.exports = {
         init: true,
         // 定位接口声明位置
         locate: true,
+        // 开启websocket mock服务
+        ws: {
+          context: ['/foo'],
+          channel: ['message', 'echo'],
+          client: 'socket.io',
+          port: 8080,
+        },
       },
       // 调用自定义服务
       myService: {
