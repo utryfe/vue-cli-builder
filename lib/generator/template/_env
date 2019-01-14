@@ -1,14 +1,14 @@
 # 默认的环境变量配置文件
 
 # HTML模板文件路径
-HTML_TEMPLATE = index.html
+BUILD_HTML_TEMPLATE = index.html
 
 # 多页应用入口脚本
 # 可用逗号（,）分隔多个匹配模式
-MPA_ENTRY = src/pages/*/main.js
+BUILD_MPA_ENTRY = src/pages/*/main.js
 
 # 单页应用入口脚本
-SPA_ENTRY = src/main.js
+BUILD_SPA_ENTRY = src/main.js
 
 # 是否构建单页应用
 BUILD_SPA = true
