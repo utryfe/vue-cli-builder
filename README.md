@@ -68,7 +68,10 @@ module.exports = {
         init: true,
         // 定位接口声明位置
         locate: true,
-        // 开启websocket mock服务
+        // 是否开启http接口mock，默认开启
+        // 如果只需要对socket进行mock，则可以通过此项关闭对http的mock
+        http: true,
+        // 开启websocket mock
         ws: {
           context: ['/foo'],
           channel: ['message', 'echo'],
