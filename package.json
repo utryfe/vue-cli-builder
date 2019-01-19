@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -17,6 +17,7 @@
     "type": "git",
     "url": "git://github.com/star2018/vue-cli-plugin-ut-builder.git"
   },
+  "homepage": "https://github.com/star2018/vue-cli-plugin-ut-builder#readme",
   "dependencies": {
     "@babel/core": "^7.2.2",
     "@babel/generator": "^7.2.2",
