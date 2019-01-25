@@ -105,6 +105,9 @@ function createRouter() {
   // 初始化全局路由配置
   globalRoutes.forEach((route) => {
     if (checkRoute(route)) {
+      if (!spa && route.path === '/') {
+        return
+      }
       routes.push(route)
     }
   })
@@ -123,15 +126,20 @@ function createRouter() {
       }
     } else {
       // mpa
-      if (ModuleApp) {
+      if (moduleRouterPath && ModuleApp) {
+        const modulePath = `/${moduleRouterPath}`
+        // 重定向至模块路由
+        routes.push({
+          path: '/',
+          redirect: modulePath,
+        })
         const indexRoute = moduleRoutes.find(
-          (route) => route && route.component === ModuleApp
+          (route) => route && route.path === modulePath
         )
-        if (indexRoute) {
-          // 重定向至模块路由
+        if (!indexRoute) {
           routes.push({
-            path: '/',
-            redirect: `/${indexRoute.module}`,
+            path: modulePath,
+            component: ModuleApp
           })
         }
       }
@@ -249,7 +257,7 @@ function createApp() {
         ModuleApp || {
           name: 'App',
           render(createElement) {
-            return createElement('<div>')
+            return createElement('div')
           },
         }
       )
