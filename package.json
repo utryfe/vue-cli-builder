@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -69,14 +69,14 @@
     "unused-files-webpack-plugin": "^3.4.0",
     "url-regex": "^4.1.1",
     "uuid": "^3.3.2",
-    "webpack": "^4.29.0",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-merge": "^4.2.1",
     "ws": "^6.1.2",
     "yazl": "^2.5.1"
   },
   "peerDependencies": {
-    "@vue/cli-service": "^3.3.0"
+    "@vue/cli-service": "^3.3.0",
+    "webpack": "^4.29.0"
   },
   "engines": {
     "node": ">=8"
