@@ -226,6 +226,7 @@ function createStore() {
 
 // 创建App
 function createApp() {
+  const spa = applicationType === 'spa'
   //
   const title = moduleTitle || globalTitle
   if (title && typeof title === 'string') {
@@ -254,7 +255,7 @@ function createApp() {
     <% } %>
     <% if (!useRouter) { %>
       return createElement(
-        ModuleApp || {
+        (spa ? GlobalApp : ModuleApp) || {
           name: 'App',
           render(createElement) {
             return createElement('div')
