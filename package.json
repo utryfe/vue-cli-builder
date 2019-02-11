@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -61,6 +61,7 @@
     "portfinder": "^1.0.20",
     "prettier": "^1.15.3",
     "read-pkg": "^4.0.1",
+    "resolve": "^1.10.0",
     "serve-static": "^1.13.2",
     "socket.io": "^2.2.0",
     "sockjs": "^0.3.19",
@@ -75,9 +76,9 @@
     "ws": "^6.1.2",
     "yazl": "^2.5.1"
   },
-  "peerDependencies": {
-    "@vue/cli-service": "^3.3.0",
-    "webpack": "^4.29.0"
+  "devDependencies": {
+    "@vue/cli-service": "^3.4.0",
+    "webpack": "^4.29.3"
   },
   "engines": {
     "node": ">=8"

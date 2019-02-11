@@ -37,6 +37,9 @@ module.exports = {
     // 使用到的服务配置（每一个配置项的值将作为参数传给相应的服务）
     // 服务可以将构建任务细化，一个服务内可以调用多个插件（webpack插件）来进行操作
     service: {
+      dll: {
+        'dll.vendors': ['vue', 'vuex', 'vue-router'],
+      },
       // 导出webpack、vue-cli配置（不带webpack://则为导出vue-cli配置），也可以使用数组导出多个文件
       // 参数值为字符串时将被解析为导出文件的路径
       eject: 'webpack://build.webpack.js',
