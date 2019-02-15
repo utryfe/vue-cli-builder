@@ -97,7 +97,7 @@ module.exports = {
     // 注册自定义的服务
     registerService: {
       // 服务项为一个函数
-      myService({ plugin, config, isDev, env }, options, projectOptions) {
+      myService({ plugin, config, isDev, env, watch }, options, projectOptions) {
         // 第一个参数是一个对象，可对其进行解构
         // 第二个参数options为调用服务时，传给服务的参数（上面service配置里面项的值）
         // 第三个参数projectOptions为整个工程的vue-cli构建配置项
