@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -69,7 +69,7 @@
     "tree-kill": "^1.2.1",
     "unused-files-webpack-plugin": "^3.4.0",
     "url-regex": "^4.1.1",
-    "ut-builder-socket-client": "^1.0.7",
+    "ut-builder-socket-client": "^1.0.8",
     "uuid": "^3.3.2",
     "webpack-concat-plugin": "^3.0.0",
     "webpack-merge": "^4.2.1",
