@@ -61,8 +61,7 @@ function initModuleRouter() {
   // 处理模块路由
   moduleRoutes.forEach((obj) => {
     if (obj && typeof obj === 'object') {
-      const { module, component, routes } = obj
-      const modulePath = `/${module}`
+      const { path: modulePath, name: moduleName, component, routes } = obj
       //
       const registered = (!Array.isArray(routes) ? [routes] : routes).reduce(
         (routes, route) => {
@@ -84,6 +83,7 @@ function initModuleRouter() {
       ) {
         // 注册当前模块路由
         registered.push({
+          name: moduleName,
           path: modulePath,
           component,
         })
@@ -127,18 +127,18 @@ function createRouter() {
     } else {
       // mpa
       if (moduleRouterPath && ModuleApp) {
-        const modulePath = `/${moduleRouterPath}`
         // 重定向至模块路由
         routes.push({
           path: '/',
-          redirect: modulePath,
+          redirect: moduleRouterPath,
         })
         const indexRoute = moduleRoutes.find(
-          (route) => route && route.path === modulePath
+          (route) => route && route.path === moduleRouterPath
         )
         if (!indexRoute) {
           routes.push({
-            path: modulePath,
+            name: moduleRouterName,
+            path: moduleRouterPath,
             component: ModuleApp
           })
         }
@@ -234,11 +234,11 @@ function createApp() {
   }
   // 挂载app
   new Vue({
-    <% if (useRouter) { %>
-    router: createRouter(),
-    <% } %>
     <% if (useVuex) { %>
     store: createStore(),
+    <% } %>
+    <% if (useRouter) { %>
+    router: createRouter(),
     <% } %>
     //
     render(createElement) {
