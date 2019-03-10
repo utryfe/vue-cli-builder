@@ -37,6 +37,16 @@ module.exports = {
     // 使用到的服务配置（每一个配置项的值将作为参数传给相应的服务）
     // 服务可以将构建任务细化，一个服务内可以调用多个插件（webpack插件）来进行操作
     service: {
+      // 自动精灵图
+      sprites: {
+        src: {
+          cwd: 'src/assets/images/icons/', // 小图标目录
+          glob: '**/*.png', // 图标名称匹配规则，glob语法
+        },
+        iconClass: 'icon', // 图标样式命名空间，可以设为空字符串（不使用命名空间）
+        classPrefix: 'icon', // 图标样式名前缀
+        kebabCaseName: true, // 样式名称格式，为true转为连字符格式
+      },
       dll: {
         'dll.vendors': ['vue', 'vuex', 'vue-router'],
       },
