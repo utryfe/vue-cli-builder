@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
