@@ -28,6 +28,10 @@ import Router from 'vue-router'
 
 // 应用类型
 const applicationType = <%= type %>
+// 发布路径
+const publicPath = <%= publicPath %>
+// 路由模式
+const defaultRouterMode = <%= routerMode %>
 
 <% if (useRouter) { %>
 // 安装Vue插件
@@ -54,6 +58,20 @@ function checkRoute(route) {
   return false
 }
 
+// 获取首页路由配置
+function getIndexRouteConfig(route) {
+  if ((Array.isArray(route.children) && route.children.length) || route.redirect) {
+    return {
+      path: '/',
+      redirect: '/index'
+    }
+  }
+  return {
+    path: '/',
+    component: route.component
+  }
+}
+
 // 初始化模块路由配置
 function initModuleRouter() {
   const appRoutes = []
@@ -77,7 +95,6 @@ function initModuleRouter() {
         []
       )
       if (
-        spa &&
         component &&
         !registered.some((route) => route.path === modulePath)
       ) {
@@ -119,29 +136,23 @@ function createRouter() {
       )
       if (indexRoute) {
         // 重定向至index路由
-        routes.push({
-          path: '/',
-          redirect: '/index',
-        })
+        routes.push(getIndexRouteConfig(indexRoute))
       }
     } else {
       // mpa
       if (moduleRouterPath && ModuleApp) {
-        // 重定向至模块路由
-        routes.push({
-          path: '/',
-          redirect: moduleRouterPath,
-        })
         const indexRoute = moduleRoutes.find(
           (route) => route && route.path === moduleRouterPath
         )
         if (!indexRoute) {
-          routes.push({
+          indexRoute = {
             name: moduleRouterName,
             path: moduleRouterPath,
             component: ModuleApp
-          })
+          }
+          routes.push(indexRoute)
         }
+        routes.push(getIndexRouteConfig(indexRoute))
       }
     }
   }
@@ -150,8 +161,9 @@ function createRouter() {
   const router = new Router(
     Object.assign(
       {
-        mode: 'hash',
-        fallback: false,
+        base: publicPath,
+        mode: defaultRouterMode,
+        fallback: true,
         scrollBehavior() {
           return { x: 0, y: 0 }
         },

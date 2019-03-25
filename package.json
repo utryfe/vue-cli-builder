@@ -71,6 +71,7 @@
     "read-pkg": "^4.0.1",
     "relative": "^3.0.2",
     "resolve": "^1.10.0",
+    "scp2": "^0.5.0",
     "serve-handler": "^5.0.8",
     "serve-static": "^1.13.2",
     "shell-escape": "^0.2.0",
