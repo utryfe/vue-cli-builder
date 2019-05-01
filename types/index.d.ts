@@ -3,6 +3,8 @@ import ChainableWebpackConfig from 'webpack-chain'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as WebpackNotifierPlugin from 'webpack-notifier'
 
+import 'icefox'
+
 import {
   WebpackPluginFunction,
   WebpackPluginInstance,
