@@ -3,15 +3,13 @@ import ChainableWebpackConfig from 'webpack-chain'
 import * as HtmlWebpackPlugin from 'html-webpack-plugin'
 import * as WebpackNotifierPlugin from 'webpack-notifier'
 
-import 'icefox'
-
 import {
   WebpackPluginFunction,
   WebpackPluginInstance,
 } from 'webpack/declarations/WebpackOptions'
 
 // 预处理配置对象
-interface PreprocessConfig {
+export interface PreprocessConfig {
   mpa?: boolean
   moduleEntry?: string
   moduleRoot?: string
@@ -34,35 +32,39 @@ interface PreprocessConfig {
 }
 
 // 拷贝
-type CopyOptions = { [from: string]: string } | { from: string; to: string }[]
+export type CopyOptions = { [from: string]: string } | { from: string; to: string }[]
 
 // 压缩
-type CompressTaskOptions = { name?: string; dot?: boolean; copy?: CopyOptions }
-type CompressOptions = boolean | string | CompressTaskOptions | CompressTaskOptions[]
+export type CompressTaskOptions = { name?: string; dot?: boolean; copy?: CopyOptions }
+export type CompressOptions =
+  | boolean
+  | string
+  | CompressTaskOptions
+  | CompressTaskOptions[]
 
 // 环境变量定义
-type DefineOptions = {
+export type DefineOptions = {
   [env: string]: string | boolean | number
 }
 
 // DLL
-type DllOptions = boolean | { [bundleName: string]: string | string[] }
+export type DllOptions = boolean | { [bundleName: string]: string | string[] }
 
 // eject
-type EjectOptions = boolean | string | string[]
+export type EjectOptions = boolean | string | string[]
 
 // html
-type HTMLOptions = { [pageName: string]: HtmlWebpackPlugin.Options }
+export type HTMLOptions = { [pageName: string]: HtmlWebpackPlugin.Options }
 
 // mock
-type WebsocketMockOptions = {
+export type WebsocketMockOptions = {
   context?: ''
   debugContext?: ''
   channel?: string | string[]
   client?: string
   port?: number
 }
-type MockOptions =
+export type MockOptions =
   | boolean
   | {
       http?: boolean
@@ -78,7 +80,7 @@ type MockOptions =
       ws: boolean | WebsocketMockOptions
     }
 
-type SpritesOptions =
+export type SpritesOptions =
   | boolean
   | {
       iconClass?: string
@@ -92,7 +94,7 @@ type SpritesOptions =
     }
 
 // unused
-type UnusedOptions =
+export type UnusedOptions =
   | boolean
   | {
       patterns: string[]
@@ -101,14 +103,14 @@ type UnusedOptions =
     }
 
 // watch
-type WatchOptions = {
+export type WatchOptions = {
   done?: () => void | Promise<any>
   watchRun?: () => void | Promise<any>
   invalid?: () => void
 }
 
 // 可用服务配置
-interface ServiceConfig {
+export interface ServiceConfig {
   copy: CopyOptions
   compress: CompressOptions
   define: DefineOptions
@@ -127,7 +129,7 @@ interface ServiceConfig {
 }
 
 // 自定义服务运行时上下文对象
-interface ServiceContext {
+export interface ServiceContext {
   api: object
   plugin: { use: () => {} }
   config: ChainableWebpackConfig
@@ -148,22 +150,23 @@ interface ServiceContext {
   watch: () => any
 }
 
-declare module '@vue/cli-service' {
-  export namespace ProjectOptions {
-    export interface pluginOptions {
-      htmlTemplate?: string
-      moduleEntry?: string
-      pageNameMap?: object
-      preprocess?: PreprocessConfig
-      service?: ServiceConfig
-      registerService?: {
-        [key: string]: {
-          (context: ServiceContext, options: any, projectOptions: ProjectOptions): any
-        }
-      }
-      registerPlugin?: {
-        [plugin: string]: WebpackPluginFunction | WebpackPluginInstance
+export interface UTBuilder extends ProjectOptions {
+  pluginOptions: {
+    htmlTemplate?: string
+    moduleEntry?: string
+    pageNameMap?: object
+    preprocess?: PreprocessConfig
+    service?: ServiceConfig
+    registerService?: {
+      [key: string]: {
+        (context: ServiceContext, options: any, projectOptions: ProjectOptions): any
       }
     }
+    registerPlugin?: {
+      [plugin: string]: WebpackPluginFunction | WebpackPluginInstance
+    }
+    [plugin: string]: any
   }
 }
+
+export default UTBuilder
