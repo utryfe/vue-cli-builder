@@ -80,6 +80,7 @@ export type MockOptions =
       ws: boolean | WebsocketMockOptions
     }
 
+// sprites
 export type SpritesOptions =
   | boolean
   | {
@@ -92,6 +93,16 @@ export type SpritesOptions =
       spritesmithOptions?: object
       retina?: object
     }
+
+// theme
+export type ThemeOption = {
+  patterns: string | string[]
+  preProcessor?: 'sass' | 'scss' | 'stylus' | 'less'
+  injector?: 'prepend' | 'append' | ((source, resources) => string)
+  globOptions?: object
+  resolveUrl?: boolean
+}
+export type ThemeOptions = string | string[] | ThemeOption | ThemeOption[]
 
 // unused
 export type UnusedOptions =
@@ -122,6 +133,7 @@ export interface ServiceConfig {
   removeConsole: boolean | { exclude: string[] }
   removeDebugger: boolean
   sprites: SpritesOptions
+  theme: ThemeOptions
   timeCost: boolean
   unused: UnusedOptions
   watch: WatchOptions
