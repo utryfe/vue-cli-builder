@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "2.0.9",
+  "version": "2.1.0",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -10,14 +10,14 @@
     "build"
   ],
   "author": {
-    "name": "stone",
+    "name": "utryfe",
     "email": "star2018@outlook.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://github.com/star2018/vue-cli-plugin-ut-builder.git"
+    "url": "git+ssh://github.com/utryfe/vue-cli-plugin-ut-builder.git"
   },
-  "homepage": "https://github.com/star2018/vue-cli-plugin-ut-builder#readme",
+  "homepage": "https://github.com/utryfe/vue-cli-plugin-ut-builder#readme",
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
@@ -48,7 +48,7 @@
     "html-webpack-plugin": "^3.2.0",
     "http-proxy": "^1.17.0",
     "http-proxy-middleware": "^0.19.1",
-    "icefox": "^1.0.6",
+    "icefox": "^1.1.0",
     "inquirer": "^6.3.1",
     "is-absolute": "^1.0.0",
     "isemail": "^3.2.0",
@@ -82,6 +82,7 @@
     "string-argv": "^0.3.0",
     "string-width": "^4.1.0",
     "style-resources-loader": "^1.2.1",
+    "svg-sprite-loader": "^4.1.6",
     "tree-kill": "^1.2.1",
     "treeify": "^1.1.0",
     "unparse-args": "^1.2.0",

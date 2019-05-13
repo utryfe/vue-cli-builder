@@ -84,7 +84,7 @@ export type MockOptions =
 export type SpritesOptions =
   | boolean
   | {
-      iconClass?: string
+      iconLibClass?: string
       classPrefix?: string
       kebabCaseName?: string
       src?: { cwd?: string; glob?: string; options?: object }
@@ -93,6 +93,14 @@ export type SpritesOptions =
       spritesmithOptions?: object
       retina?: object
     }
+
+// svg icons
+export type SvgIconConfig = {
+  src?: string
+  prefix?: string
+  kebabCaseName?: string
+}
+export type SvgIconOptions = boolean | string | SvgIconConfig | SvgIconConfig[]
 
 // theme
 export type ThemeOption = {
@@ -133,6 +141,7 @@ export interface ServiceConfig {
   removeConsole: boolean | { exclude: string[] }
   removeDebugger: boolean
   sprites: SpritesOptions
+  svgIcon: SvgIconOptions
   theme: ThemeOptions
   timeCost: boolean
   unused: UnusedOptions
@@ -168,7 +177,7 @@ export interface UTBuilder extends ProjectOptions {
     moduleEntry?: string
     pageNameMap?: object
     preprocess?: PreprocessConfig
-    service?: ServiceConfig
+    services?: ServiceConfig
     registerService?: {
       [key: string]: {
         (context: ServiceContext, options: any, projectOptions: ProjectOptions): any
