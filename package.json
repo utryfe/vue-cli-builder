@@ -1,6 +1,6 @@
 {
   "name": "vue-cli-plugin-ut-builder",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "vue命令行插件",
   "main": "index.js",
   "scripts": {},
@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://github.com/utryfe/vue-cli-plugin-ut-builder.git"
+    "url": "git+ssh://github.com/utryfe/vue-cli-builder.git"
   },
-  "homepage": "https://github.com/utryfe/vue-cli-plugin-ut-builder#readme",
+  "homepage": "https://utryfe.github.io/icefox-docs/config/builder.html",
   "dependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
@@ -49,7 +49,7 @@
     "html-webpack-plugin": "^3.2.0",
     "http-proxy": "^1.17.0",
     "http-proxy-middleware": "^0.19.1",
-    "icefox": "^1.1.0",
+    "icefox": "^1.1.1",
     "inquirer": "^6.3.1",
     "is-absolute": "^1.0.0",
     "isemail": "^3.2.0",
