@@ -16,6 +16,7 @@ export interface PreprocessConfig {
   htmlTemplate?: string
   moduleFilter?: string
   routeExtensions?: string
+  routerViews?: string
   kebabCasePath?: boolean
   codeSplitting?: boolean
   appPlugins?: string
