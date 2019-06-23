@@ -19,6 +19,7 @@ export interface PreprocessConfig {
   routerViews?: string
   kebabCasePath?: boolean
   codeSplitting?: boolean
+  codeSplittingExclude?: string
   appPlugins?: string
   appUseVuex?: boolean
   appUseRouter?: boolean
